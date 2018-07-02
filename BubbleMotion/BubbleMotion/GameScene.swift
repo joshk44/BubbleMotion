@@ -1,39 +1,31 @@
 import SpriteKit
 import CoreMotion
+import AudioToolbox
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     var bubble = SKSpriteNode()
     var platform = SKSpriteNode()
+    var background = SKSpriteNode()
     var motionManager = CMMotionManager()
     var destX:CGFloat  = 0.0
     var destY:CGFloat  = 0.0
-    let bubbleCat : UInt32 = 0x1 << 1
-    let platformCat : UInt32 = 0x1 << 2
+    
+    var lastUpdateTime: CFTimeInterval = 0.0
+    var deltaTime: CFTimeInterval = 0.0
+    var doSomethingTimer: CFTimeInterval = 0.0
+    var isInContact: Bool = false
     
     
     override func didMove(to view: SKView) {
         
         platform = (self.childNode(withName: "platform") as? SKSpriteNode)!
         platform.name = "platform"
-//        platform.physicsBody?.categoryBitMask = platformCat
-//        platform.physicsBody?.collisionBitMask = 0
-//        platform.physicsBody?.contactTestBitMask = bubbleCat
-        platform.zPosition = 1
         
         bubble = (self.childNode(withName: "bubble") as? SKSpriteNode)!
         bubble.name = "bubble"
-        let phsb = SKPhysicsBody(circleOfRadius: bubble.size.width/2)
-        //bubble.physicsBody = phsb
-
-        bubble.physicsBody?.affectedByGravity = false
-        platform.physicsBody?.isDynamic = false
-        //bubble.physicsBody?.isDynamic = false
-
-//        bubble.physicsBody?.categoryBitMask = bubbleCat
-//        bubble.physicsBody?.collisionBitMask = 0
-//        bubble.physicsBody?.contactTestBitMask = platformCat
-        bubble.zPosition = 2
         
+        //background = (self.childNode(withName: "background") as? SKSpriteNode)!
+        //addParallaxToView(vw: background)
         
         self.physicsWorld.contactDelegate = self
 
@@ -65,18 +57,52 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func didEnd(_ contact: SKPhysicsContact){
         print("collided! didEnd")
-        self.backgroundColor = UIColor.red
+        self.isInContact = false
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+        updateBubble()
     }
     
     
     func didBegin(_ contact: SKPhysicsContact) {
-        self.backgroundColor = UIColor.green
-
         print("collided! didBegin")
+        self.isInContact = true
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+        updateBubble()
+    }
+    
+    func updateBubble () {
+        if self.isInContact {
+            self.bubble.texture = SKTexture(imageNamed: "bubble_happy")
+        } else {
+            self.bubble.texture = SKTexture(imageNamed: "bubble_sad")
+
+        }
+        
+    }
+    
+    func blink (_ currentTime: CFTimeInterval) {
+        deltaTime = currentTime - lastUpdateTime
+        lastUpdateTime = currentTime
+        doSomethingTimer += deltaTime
+        
+        //var blink = random
+        if doSomethingTimer >= 5.0 {
+            if (!(self.bubble.texture?.description.contains("bubble_blink"))!) {
+                self.bubble.texture = SKTexture(imageNamed: "bubble_blink")
+            }
+            doSomethingTimer = 0.0
+        } else if doSomethingTimer >= 0.2 && (self.bubble.texture?.description.contains("bubble_blink"))! {
+            updateBubble()
+        }
+        
+
+        //print("DELTA: \(deltaTime) CURRENT TIME: \(currentTime)")
     }
     
     override func update(_ currentTime: CFTimeInterval) {
 
+        blink (currentTime)
+        
         if (self.bubble.position.x != destX) {
             let action = SKAction.moveTo(x: destX, duration: 0.04)
             self.bubble.run(action)
@@ -86,5 +112,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let action2 = SKAction.moveTo(y: destY, duration: 0.04)
             self.bubble.run(action2)
         }
+    }
+    
+    func addParallaxToView(vw: UIView) {
+        let amount = 100
+        
+        let horizontal = UIInterpolatingMotionEffect(keyPath: "center.x", type: .tiltAlongHorizontalAxis)
+        horizontal.minimumRelativeValue = -amount
+        horizontal.maximumRelativeValue = amount
+        
+        let vertical = UIInterpolatingMotionEffect(keyPath: "center.y", type: .tiltAlongVerticalAxis)
+        vertical.minimumRelativeValue = -amount
+        vertical.maximumRelativeValue = amount
+        
+        let group = UIMotionEffectGroup()
+        group.motionEffects = [horizontal, vertical]
+        vw.addMotionEffect(group)
     }
 }
