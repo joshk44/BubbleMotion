@@ -10,8 +10,11 @@
 		55284FBD20D73A7C0090A230 /* base.png in Resources */ = {isa = PBXBuildFile; fileRef = 55284FBC20D73A7C0090A230 /* base.png */; };
 		5544B42A20CF817A00804B47 /* bubble_happy.png in Resources */ = {isa = PBXBuildFile; fileRef = 5544B42920CF817900804B47 /* bubble_happy.png */; };
 		555681DA20E9869400527B2B /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 555681D920E9869300527B2B /* background.png */; };
+		5570BE692126934600990D74 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5570BE682126934500990D74 /* LoginViewController.swift */; };
 		55BC2B7E20E05B8400895595 /* bubble_sad.png in Resources */ = {isa = PBXBuildFile; fileRef = 55BC2B7D20E05B8400895595 /* bubble_sad.png */; };
 		55BC2B8020E0A6B600895595 /* bubble_blink.png in Resources */ = {isa = PBXBuildFile; fileRef = 55BC2B7F20E0A6B600895595 /* bubble_blink.png */; };
+		55EC315C212167AA00AF4D43 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EC315B212167AA00AF4D43 /* GradientView.swift */; };
+		55EC315E21216BA800AF4D43 /* background_menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 55EC315D21216BA700AF4D43 /* background_menu.png */; };
 		E26BD65A1A386AC600A8F1D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26BD6591A386AC600A8F1D6 /* AppDelegate.swift */; };
 		E26BD65C1A386AC600A8F1D6 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E26BD65B1A386AC600A8F1D6 /* GameScene.sks */; };
 		E26BD65E1A386AC600A8F1D6 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26BD65D1A386AC600A8F1D6 /* GameScene.swift */; };
@@ -36,8 +39,11 @@
 		55284FBC20D73A7C0090A230 /* base.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = base.png; sourceTree = "<group>"; };
 		5544B42920CF817900804B47 /* bubble_happy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubble_happy.png; sourceTree = "<group>"; };
 		555681D920E9869300527B2B /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		5570BE682126934500990D74 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		55BC2B7D20E05B8400895595 /* bubble_sad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubble_sad.png; sourceTree = "<group>"; };
 		55BC2B7F20E0A6B600895595 /* bubble_blink.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubble_blink.png; sourceTree = "<group>"; };
+		55EC315B212167AA00AF4D43 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		55EC315D21216BA700AF4D43 /* background_menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background_menu.png; sourceTree = "<group>"; };
 		E26BD6541A386AC600A8F1D6 /* BubbleMotion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BubbleMotion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E26BD6581A386AC600A8F1D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E26BD6591A386AC600A8F1D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -73,6 +79,7 @@
 		558B697E20E9FBC5004E4A91 /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				55EC315D21216BA700AF4D43 /* background_menu.png */,
 				555681D920E9869300527B2B /* background.png */,
 				55BC2B7F20E0A6B600895595 /* bubble_blink.png */,
 				55BC2B7D20E05B8400895595 /* bubble_sad.png */,
@@ -80,6 +87,44 @@
 				55284FBC20D73A7C0090A230 /* base.png */,
 			);
 			path = assets;
+			sourceTree = "<group>";
+		};
+		55EC31572121663B00AF4D43 /* SupportFiles */ = {
+			isa = PBXGroup;
+			children = (
+				E26BD6661A386AC600A8F1D6 /* LaunchScreen.xib */,
+				E26BD6641A386AC600A8F1D6 /* Images.xcassets */,
+				E26BD6611A386AC600A8F1D6 /* Main.storyboard */,
+				E26BD65B1A386AC600A8F1D6 /* GameScene.sks */,
+				558B697E20E9FBC5004E4A91 /* assets */,
+				E26BD6591A386AC600A8F1D6 /* AppDelegate.swift */,
+			);
+			path = SupportFiles;
+			sourceTree = "<group>";
+		};
+		55EC31582121669300AF4D43 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E26BD65D1A386AC600A8F1D6 /* GameScene.swift */,
+				E26BD65F1A386AC600A8F1D6 /* GameViewController.swift */,
+				5570BE682126934500990D74 /* LoginViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		55EC3159212166A300AF4D43 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				55EC315B212167AA00AF4D43 /* GradientView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		55EC315A2121671A00AF4D43 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		E26BD64B1A386AC600A8F1D6 = {
@@ -103,14 +148,10 @@
 		E26BD6561A386AC600A8F1D6 /* BubbleMotion */ = {
 			isa = PBXGroup;
 			children = (
-				558B697E20E9FBC5004E4A91 /* assets */,
-				E26BD6591A386AC600A8F1D6 /* AppDelegate.swift */,
-				E26BD65B1A386AC600A8F1D6 /* GameScene.sks */,
-				E26BD65D1A386AC600A8F1D6 /* GameScene.swift */,
-				E26BD65F1A386AC600A8F1D6 /* GameViewController.swift */,
-				E26BD6611A386AC600A8F1D6 /* Main.storyboard */,
-				E26BD6641A386AC600A8F1D6 /* Images.xcassets */,
-				E26BD6661A386AC600A8F1D6 /* LaunchScreen.xib */,
+				55EC315A2121671A00AF4D43 /* Model */,
+				55EC3159212166A300AF4D43 /* Views */,
+				55EC31582121669300AF4D43 /* Controllers */,
+				55EC31572121663B00AF4D43 /* SupportFiles */,
 				E26BD6571A386AC600A8F1D6 /* Supporting Files */,
 			);
 			path = BubbleMotion;
@@ -227,6 +268,7 @@
 			files = (
 				E26BD6681A386AC600A8F1D6 /* LaunchScreen.xib in Resources */,
 				E26BD6651A386AC600A8F1D6 /* Images.xcassets in Resources */,
+				55EC315E21216BA800AF4D43 /* background_menu.png in Resources */,
 				55284FBD20D73A7C0090A230 /* base.png in Resources */,
 				E26BD65C1A386AC600A8F1D6 /* GameScene.sks in Resources */,
 				55BC2B7E20E05B8400895595 /* bubble_sad.png in Resources */,
@@ -252,7 +294,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E26BD65E1A386AC600A8F1D6 /* GameScene.swift in Sources */,
+				55EC315C212167AA00AF4D43 /* GradientView.swift in Sources */,
 				E26BD6601A386AC600A8F1D6 /* GameViewController.swift in Sources */,
+				5570BE692126934600990D74 /* LoginViewController.swift in Sources */,
 				E26BD65A1A386AC600A8F1D6 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -414,7 +458,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.dharma.Motion;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -430,7 +474,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.dharma.Motion;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

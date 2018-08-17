@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="mFh-1B-7pR">
+    <device id="retina5_9" orientation="landscape">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Login-->
+        <scene sceneID="5d9-5o-j1y">
+            <objects>
+                <viewController storyboardIdentifier="login" title="Login" hidesBottomBarWhenPushed="YES" id="mFh-1B-7pR" customClass="LoginViewController" customModule="BubbleMotion" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ASL-hr-Ja2"/>
+                        <viewControllerLayoutGuide type="bottom" id="Hgm-f0-pym"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleAspectFit" id="6Uq-Ls-GVj">
+                        <rect key="frame" x="0.0" y="0.0" width="812" height="375"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9wb-mQ-j1t" customClass="GradientView" customModule="BubbleMotion" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="812" height="375"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                        <color key="value" red="1" green="0.066666666666666666" blue="0.49411764705882355" alpha="1" colorSpace="deviceRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                        <color key="value" red="1" green="0.50588235294117645" blue="0.14901960784313725" alpha="1" colorSpace="deviceRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8jm-JR-QRI">
+                                <rect key="frame" x="124" y="59" width="564" height="258"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZHp-lu-WSZ">
+                                        <rect key="frame" x="244" y="20" width="300" height="39"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="300" id="q31-LJ-ahZ"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="29"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dhv-ym-I8E">
+                                        <rect key="frame" x="244" y="67" width="300" height="39"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="29"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g0E-yo-udm">
+                                        <rect key="frame" x="244" y="202" width="300" height="36"/>
+                                        <color key="backgroundColor" red="0.18823529411764706" green="0.49411764705882355" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Just Play">
+                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="justPlay:" destination="mFh-1B-7pR" eventType="touchUpInside" id="Zbb-1S-wvb"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FRS-QY-b17">
+                                        <rect key="frame" x="244" y="158" width="300" height="36"/>
+                                        <color key="backgroundColor" red="0.18823529410000001" green="0.4941176471" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="New User">
+                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="newUser:" destination="mFh-1B-7pR" eventType="touchUpInside" id="hEf-mw-9vc"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jXR-fX-HL2">
+                                        <rect key="frame" x="244" y="114" width="300" height="36"/>
+                                        <color key="backgroundColor" red="0.18823529411764706" green="0.49411764705882355" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Login">
+                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="login:" destination="mFh-1B-7pR" eventType="touchUpInside" id="oTm-Mv-siN"/>
+                                        </connections>
+                                    </button>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="bubble_happy.png" translatesAutoresizingMaskIntoConstraints="NO" id="qu4-Ka-NmO">
+                                        <rect key="frame" x="49" y="79" width="100" height="100"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="ccY-Io-WpZ"/>
+                                            <constraint firstAttribute="width" constant="100" id="mKT-vK-gF4"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="ZHp-lu-WSZ" firstAttribute="top" secondItem="8jm-JR-QRI" secondAttribute="top" constant="20" symbolic="YES" id="Gwj-Sh-RKF"/>
+                                    <constraint firstItem="jXR-fX-HL2" firstAttribute="top" secondItem="dhv-ym-I8E" secondAttribute="bottom" constant="8" symbolic="YES" id="HwA-LY-luE"/>
+                                    <constraint firstAttribute="trailing" secondItem="ZHp-lu-WSZ" secondAttribute="trailing" constant="20" symbolic="YES" id="Ind-BX-FN6"/>
+                                    <constraint firstItem="qu4-Ka-NmO" firstAttribute="centerY" secondItem="8jm-JR-QRI" secondAttribute="centerY" id="KfV-TW-9oE"/>
+                                    <constraint firstItem="dhv-ym-I8E" firstAttribute="trailing" secondItem="ZHp-lu-WSZ" secondAttribute="trailing" id="Kow-1d-vBK"/>
+                                    <constraint firstItem="g0E-yo-udm" firstAttribute="top" secondItem="FRS-QY-b17" secondAttribute="bottom" constant="8" symbolic="YES" id="Rx4-xU-jcN"/>
+                                    <constraint firstItem="FRS-QY-b17" firstAttribute="top" secondItem="jXR-fX-HL2" secondAttribute="bottom" constant="8" symbolic="YES" id="TiY-vY-Bjb"/>
+                                    <constraint firstItem="dhv-ym-I8E" firstAttribute="top" secondItem="ZHp-lu-WSZ" secondAttribute="bottom" constant="8" symbolic="YES" id="V0v-sw-xYY"/>
+                                    <constraint firstItem="jXR-fX-HL2" firstAttribute="leading" secondItem="ZHp-lu-WSZ" secondAttribute="leading" id="X6x-h0-UNn"/>
+                                    <constraint firstItem="FRS-QY-b17" firstAttribute="leading" secondItem="ZHp-lu-WSZ" secondAttribute="leading" id="fKc-xP-aE7"/>
+                                    <constraint firstItem="dhv-ym-I8E" firstAttribute="leading" secondItem="qu4-Ka-NmO" secondAttribute="trailing" constant="95" id="ktb-LS-sq8"/>
+                                    <constraint firstItem="qu4-Ka-NmO" firstAttribute="leading" secondItem="8jm-JR-QRI" secondAttribute="leading" constant="49" id="lSE-7k-mtd"/>
+                                    <constraint firstItem="g0E-yo-udm" firstAttribute="trailing" secondItem="ZHp-lu-WSZ" secondAttribute="trailing" id="pBI-Pd-5Hs"/>
+                                    <constraint firstItem="g0E-yo-udm" firstAttribute="leading" secondItem="ZHp-lu-WSZ" secondAttribute="leading" id="pSu-CP-g2A"/>
+                                    <constraint firstItem="jXR-fX-HL2" firstAttribute="trailing" secondItem="ZHp-lu-WSZ" secondAttribute="trailing" id="psz-xB-bws"/>
+                                    <constraint firstItem="dhv-ym-I8E" firstAttribute="leading" secondItem="ZHp-lu-WSZ" secondAttribute="leading" id="q3e-a7-913"/>
+                                    <constraint firstItem="FRS-QY-b17" firstAttribute="trailing" secondItem="ZHp-lu-WSZ" secondAttribute="trailing" id="qMJ-hF-NSr"/>
+                                    <constraint firstAttribute="bottom" secondItem="g0E-yo-udm" secondAttribute="bottom" constant="20" symbolic="YES" id="vUK-jv-Usv"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="8jm-JR-QRI" firstAttribute="centerX" secondItem="6Uq-Ls-GVj" secondAttribute="centerX" id="c7X-To-jyu"/>
+                            <constraint firstItem="8jm-JR-QRI" firstAttribute="centerY" secondItem="6Uq-Ls-GVj" secondAttribute="centerY" id="mj2-f8-MdA"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="passwordTextView" destination="dhv-ym-I8E" id="wb2-0v-5qV"/>
+                        <outlet property="userTextView" destination="ZHp-lu-WSZ" id="8s7-VM-EbB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uCH-Nm-Xlt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-432" y="42"/>
+        </scene>
+        <!--Game View Controller-->
+        <scene sceneID="CtS-rA-C9T">
+            <objects>
+                <viewController storyboardIdentifier="Gameplay" id="LVB-YS-i5n" customClass="GameViewController" customModule="BubbleMotion" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="goS-By-74u"/>
+                        <viewControllerLayoutGuide type="bottom" id="Wlx-yX-Kvj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bdc-N1-crn" customClass="SKView">
+                        <rect key="frame" x="0.0" y="0.0" width="812" height="375"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="btX-cZ-eVz" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="418" y="42"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="bubble_happy.png" width="640" height="626"/>
+    </resources>
+</document>
