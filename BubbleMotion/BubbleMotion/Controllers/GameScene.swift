@@ -14,6 +14,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var deltaTime: CFTimeInterval = 0.0
     var doSomethingTimer: CFTimeInterval = 0.0
     var isInContact: Bool = false
+    var isBlinking: Bool = false
     
     
     override func didMove(to view: SKView) {
@@ -71,15 +72,61 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func updateBubble () {
+        self.bubble.texture = SKTexture(imageNamed: getBubbleName())
+    }
+    
+    
+    func getBubbleName () -> String {
+        var name = ""
+        
+        if self.isInContact {
+            name = "bubble_happy"
+        } else {
+            name = "bubble_sad"
+        }
+        
+        if self.isBlinking {
+            name = name + "_blink"
+        }
+        
+        return name
+        
+    }
+    
+    func blink (_ currentTime: CFTimeInterval) {
+        deltaTime = currentTime - lastUpdateTime
+        lastUpdateTime = currentTime
+        doSomethingTimer += deltaTime
+        
+        //var blink = random
+        if doSomethingTimer >= 5.0 {
+            if (!isBlinking) {
+               isBlinking = true
+            }
+            doSomethingTimer = 0.0
+        } else if doSomethingTimer >= 0.2 && isBlinking {
+            isBlinking = false
+
+        }
+        
+        updateBubble()
+
+        //print("DELTA: \(deltaTime) CURRENT TIME: \(currentTime)")
+    }
+    
+    
+    
+    /*
+     
+     func updateBubble () {
         if self.isInContact {
             self.bubble.texture = SKTexture(imageNamed: "bubble_happy")
         } else {
             self.bubble.texture = SKTexture(imageNamed: "bubble_sad")
-
         }
-        
-    }
-    
+     }
+     
+     
     func blink (_ currentTime: CFTimeInterval) {
         deltaTime = currentTime - lastUpdateTime
         lastUpdateTime = currentTime
@@ -97,7 +144,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
 
         //print("DELTA: \(deltaTime) CURRENT TIME: \(currentTime)")
-    }
+    } */
     
     override func update(_ currentTime: CFTimeInterval) {
 

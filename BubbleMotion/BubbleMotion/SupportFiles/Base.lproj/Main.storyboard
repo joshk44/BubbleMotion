@@ -128,7 +128,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uCH-Nm-Xlt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-432" y="42"/>
+            <point key="canvasLocation" x="-791" y="41"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="CtS-rA-C9T">
@@ -146,7 +146,87 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="btX-cZ-eVz" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="418" y="42"/>
+            <point key="canvasLocation" x="1322" y="41"/>
+        </scene>
+        <!--SelectType-->
+        <scene sceneID="rsm-gG-ziW">
+            <objects>
+                <viewController storyboardIdentifier="SelectType" title="SelectType" hidesBottomBarWhenPushed="YES" id="cLu-l7-D7k" customClass="SelectTypeViewController" customModule="BubbleMotion" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mKO-yI-CV0"/>
+                        <viewControllerLayoutGuide type="bottom" id="lcI-vY-YzE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleAspectFit" id="hSo-f7-ugl">
+                        <rect key="frame" x="0.0" y="0.0" width="812" height="375"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zJd-9E-oS4" customClass="GradientView" customModule="BubbleMotion" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="812" height="375"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                        <color key="value" red="1" green="0.066666666669999999" blue="0.4941176471" alpha="1" colorSpace="deviceRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                        <color key="value" red="1" green="0.50588235290000005" blue="0.14901960780000001" alpha="1" colorSpace="deviceRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yra-Vd-z8J">
+                                <rect key="frame" x="124.33333333333331" y="59" width="564" height="258"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HcZ-W3-StS">
+                                        <rect key="frame" x="132" y="73" width="300" height="36"/>
+                                        <color key="backgroundColor" red="0.18823529410000001" green="0.4941176471" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="36" id="FMx-AO-YSK"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="Jjz-ex-rm2"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Single Player">
+                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="startSinglePlayer:" destination="cLu-l7-D7k" eventType="touchUpInside" id="kbB-ge-8n8"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FZ1-ug-93d">
+                                        <rect key="frame" x="132" y="149" width="300" height="36"/>
+                                        <color key="backgroundColor" red="0.18823529410000001" green="0.4941176471" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="36" id="ltL-cb-CVB"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Multiplayer">
+                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="startMultiplayer:" destination="cLu-l7-D7k" eventType="touchUpInside" id="uwU-zW-HvF"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="FZ1-ug-93d" firstAttribute="leading" secondItem="HcZ-W3-StS" secondAttribute="leading" id="5lu-KT-zpL"/>
+                                    <constraint firstItem="HcZ-W3-StS" firstAttribute="top" secondItem="yra-Vd-z8J" secondAttribute="top" constant="73" id="Qlv-1b-vNP"/>
+                                    <constraint firstItem="FZ1-ug-93d" firstAttribute="trailing" secondItem="HcZ-W3-StS" secondAttribute="trailing" id="dyY-PZ-Pnp"/>
+                                    <constraint firstItem="HcZ-W3-StS" firstAttribute="leading" secondItem="yra-Vd-z8J" secondAttribute="leading" constant="132" id="etF-zT-2YU"/>
+                                    <constraint firstItem="FZ1-ug-93d" firstAttribute="top" secondItem="HcZ-W3-StS" secondAttribute="bottom" constant="40" id="foh-Oc-skG"/>
+                                    <constraint firstAttribute="bottom" secondItem="FZ1-ug-93d" secondAttribute="bottom" constant="73" id="p39-9e-nK5"/>
+                                    <constraint firstAttribute="trailing" secondItem="HcZ-W3-StS" secondAttribute="trailing" constant="132" id="ueV-tD-oAY"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="yra-Vd-z8J" firstAttribute="centerX" secondItem="hSo-f7-ugl" secondAttribute="centerX" id="FnC-Mv-DRu"/>
+                            <constraint firstItem="yra-Vd-z8J" firstAttribute="centerY" secondItem="hSo-f7-ugl" secondAttribute="centerY" id="dPn-iC-G0c"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eCG-n5-3Fw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="55" y="41"/>
         </scene>
     </scenes>
     <resources>

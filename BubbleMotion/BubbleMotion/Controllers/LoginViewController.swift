@@ -26,7 +26,7 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func justPlay(_ sender: UIButton) {
-        let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "Gameplay")
+        let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "SelectType")
         self.present (loginViewController!, animated: true)
     }
     
