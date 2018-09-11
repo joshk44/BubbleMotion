@@ -15,6 +15,8 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var passwordTextView: UITextField!
     
+    
+    @IBOutlet weak var background: GradientView!
     override func viewDidLoad() {
         super.viewDidLoad()
     }

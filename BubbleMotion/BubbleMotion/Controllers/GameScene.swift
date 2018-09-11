@@ -23,9 +23,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var gameState: GameState = GameState.Normal
     var acelerationIndex: Double = 100;
     
-
-    
     override func didMove(to view: SKView) {
+        self.scaleMode = .aspectFill
+        let screenSize = UIScreen.main.bounds
         
         startTimer()
         platform = (self.childNode(withName: "platform") as? SKSpriteNode)!
@@ -33,9 +33,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         bubble = (self.childNode(withName: "bubble") as? SKSpriteNode)!
         bubble.name = "bubble"
+        bubble.position = CGPoint(x: screenSize.width/2, y: screenSize.height/2)
         
         self.physicsWorld.contactDelegate = self
-
+        
         if motionManager.isAccelerometerAvailable == true {
             
             motionManager.startAccelerometerUpdates(to: OperationQueue.current!, withHandler:{
@@ -44,23 +45,40 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 let currentX = self.bubble.position.x
                 let currentY = self.bubble.position.y
                 
-                if Double((data?.acceleration.y)!) != 0 {
-                    let nextX = currentX - CGFloat((data?.acceleration.y)! * self.acelerationIndex)
-                    if (nextX-70 > 0 && nextX < self.frame.size.width-70) {
-                        self.destX = nextX
+                if (self.gameState == GameState.Magnet) {
+                    
+                    if Double((data?.acceleration.x)!) != 0 {
+                        let nextX = currentX - CGFloat((data?.acceleration.x)! * self.acelerationIndex)
+                        if (nextX - self.bubble.size.height/2 > 0 && nextX < screenSize.width - self.bubble.size.height) {
+                            self.destX = nextX
+                        }
                     }
-                }
-                
-                if Double((data?.acceleration.x)!) != 0 {
-                    let nextY = currentY + CGFloat((data?.acceleration.x)! * self.acelerationIndex)
-                    if (nextY-70 > 0 && nextY < self.frame.size.height-70) {
-                        self.destY = nextY
+                    if Double((data?.acceleration.y)!) != 0 {
+                        let nextY = currentY + CGFloat((data?.acceleration.y)! * self.acelerationIndex)
+                        if (nextY - self.bubble.size.height > 0 && nextY < screenSize.height - self.bubble.size.height/2) {
+                            self.destY = nextY
+                        }
+                    }
+                    
+                } else {
+                    
+                    if Double((data?.acceleration.y)!) != 0 {
+                        let nextX = currentX - CGFloat((data?.acceleration.y)! * self.acelerationIndex)
+                        if (nextX - self.bubble.size.height/2 > 0 && nextX < screenSize.width - self.bubble.size.height) {
+                            self.destX = nextX
+                        }
+                    }
+                    
+                    if Double((data?.acceleration.x)!) != 0 {
+                        let nextY = currentY + CGFloat((data?.acceleration.x)! * self.acelerationIndex)
+                        if (nextY - self.bubble.size.height > 0 && nextY < screenSize.height - self.bubble.size.height/2) {
+                            self.destY = nextY
+                        }
                     }
                 }
             })
         }
     }
-    
     
     func didEnd(_ contact: SKPhysicsContact){
         print("collided! didEnd")
@@ -95,19 +113,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         } else {
             name = "bubble_sad"
         }
-
-        
         if self.isBlinking {
             name += "_blink"
         }
-        
-        
         if (self.gameState == GameState.Frozen){
             name += "_iced"
         }
-        
         return name
-        
     }
     
     func blink (_ currentTime: CFTimeInterval) {
@@ -115,10 +127,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         lastUpdateTime = currentTime
         doSomethingTimer += deltaTime
         
-        //var blink = random
         if doSomethingTimer >= 5.0 {
             if (!isBlinking) {
-               isBlinking = true
+                isBlinking = true
             }
             doSomethingTimer = 0.0
         } else if doSomethingTimer >= 0.2 && isBlinking {
@@ -129,7 +140,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     override func update(_ currentTime: CFTimeInterval) {
-
+        
         blink (currentTime)
         
         if (self.bubble.position.x != destX) {
@@ -143,7 +154,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-
+    
     func startTimer() {
         countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
     }
@@ -157,7 +168,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         if (timeOutContact == 3 ) {
-            applyFrozenEffect ()
+            applyMagnetEffect ()
         }
         
         if matchTime != 0 {
@@ -176,11 +187,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         acelerationIndex = 10;
     }
     
+    func applyFocusEffect () {
+        self.gameState = GameState.Focus
+        self.platform.scale(to: CGSize(width: 100, height: 100))
+    }
+    
+    func applyZeroGravityEffect () {
+        self.gameState = GameState.GravityZero
+        self.acelerationIndex = 300;
+    }
+    
+    func applyMagnetEffect () {
+        self.gameState = GameState.Magnet
+    }
+    
     func applyNormalState () {
         self.gameState = GameState.Normal
         acelerationIndex = 100;
+        self.platform.scale(to: CGSize(width: 160, height: 160))
     }
-
+    
 }
 
 enum GameState {

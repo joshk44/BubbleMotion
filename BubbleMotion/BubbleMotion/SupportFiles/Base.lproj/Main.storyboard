@@ -27,7 +27,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="endColor">
-                                        <color key="value" red="1" green="0.066666666666666666" blue="0.49411764705882355" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="value" red="0.73826142131979688" green="0.00035488221120891808" blue="0.26206086982521698" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="startColor">
                                         <color key="value" red="1" green="0.50588235294117645" blue="0.14901960784313725" alpha="1" colorSpace="deviceRGB"/>
@@ -122,6 +122,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="background" destination="9wb-mQ-j1t" id="gqx-X0-nbR"/>
                         <outlet property="passwordTextView" destination="dhv-ym-I8E" id="wb2-0v-5qV"/>
                         <outlet property="userTextView" destination="ZHp-lu-WSZ" id="8s7-VM-EbB"/>
                     </connections>

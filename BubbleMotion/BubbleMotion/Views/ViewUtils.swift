@@ -14,7 +14,7 @@ import AudioToolbox
 
 class ViewUtils {
     
-    func addParallaxToView(vw: UIView) {
+    class func addParallaxToView(vw: UIView) {
         let amount = 100
         
         let horizontal = UIInterpolatingMotionEffect(keyPath: "center.x", type: .tiltAlongHorizontalAxis)
