@@ -21,6 +21,8 @@ class SelectTypeViewController: UIViewController {
     }
     
     @IBAction func startMultiplayer(_ sender: Any) {
+        let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "Multiplayer")
+        self.present (loginViewController!, animated: true)
     }
 }
 
