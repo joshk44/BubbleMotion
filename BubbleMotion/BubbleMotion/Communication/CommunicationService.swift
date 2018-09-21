@@ -57,9 +57,9 @@ class CommunicationService : NSObject {
     func sendInvitationToPlay () {
         
         let jsonMessage: [String: Any] = [
-            "peer_id": self.myPeerId.displayName,
-            "message_type": Message.Invite.rawValue,
-            "ready": true
+            "sender": self.myPeerId.displayName,
+            "messageType": MessageType.Invite.rawValue,
+            "value": "true"
         ]
         
         let jsonData = try! JSONSerialization.data(withJSONObject: jsonMessage)
@@ -67,12 +67,12 @@ class CommunicationService : NSObject {
         send (message: jsonString!)
     }
     
-    func respondInvitationToPlay () {
+    func respondInvitationToPlay (response: Bool) {
         
         let jsonMessage: [String: Any] = [
-            "peer_id": self.myPeerId.displayName,
-            "message_type": Message.ResponseInvite.rawValue,
-            "ready": true
+            "sender": self.myPeerId.displayName,
+            "messageType": MessageType.ResponseInvite.rawValue,
+            "value": response.description
         ]
         
         let jsonData = try! JSONSerialization.data(withJSONObject: jsonMessage)
@@ -83,8 +83,9 @@ class CommunicationService : NSObject {
     func startMatch () {
         
         let jsonMessage: [String: Any] = [
-            "peer_id": self.myPeerId.displayName,
-            "message_type": Message.StartMatch.rawValue,
+            "sender": self.myPeerId.displayName,
+            "messageType": MessageType.StartMatch.rawValue,
+            "value": "true"
         ]
         
         let jsonData = try! JSONSerialization.data(withJSONObject: jsonMessage)
@@ -97,7 +98,7 @@ class CommunicationService : NSObject {
     
     func send(message : String) {
         NSLog("%@", "sendBomb: \(message) to \(session.connectedPeers.count) peers")
-
+        
         if session.connectedPeers.count > 0 {
             do {
                 try self.session.send(message.data(using: .utf8)!, toPeers: session.connectedPeers, with: .reliable)
@@ -160,17 +161,20 @@ extension CommunicationService : MCSessionDelegate {
         
         let str = String(data: data, encoding: .utf8)!
         //NSLog("%@", "didReceiveData: \(str)")
+        let message = parseJSON (data: data)
         
-        switch str {
-        case Message.Invite.rawValue:
-            self.respondInvitationToPlay()
-        case Message.ResponseInvite.rawValue:
+        switch message.messageType {
+        case MessageType.Invite.rawValue:
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.showMultiplayerInvite()
+            
+        case MessageType.ResponseInvite.rawValue:
             self.startMatch()
         default:
             NSLog("%@", "non process data: \(str)")
-
+            
         }
-
+        
         //self.delegate?.colorChanged(manager: self, colorString: str)
     }
     
@@ -186,13 +190,30 @@ extension CommunicationService : MCSessionDelegate {
         NSLog("%@", "didFinishReceivingResourceWithName")
     }
     
+    
+    struct Message: Decodable {
+        var messageType: String
+        var sender: String
+        var value: String
+    }
+    
+    func parseJSON(data: Data) -> Message{
+        var resultValue: Message?
+        do {
+            let decoder = JSONDecoder()
+            resultValue = try decoder.decode(Message.self, from: data)
+        } catch let error {
+            print ("error parsing json", error)
+        }
+        return resultValue!
+    }
+    
 }
 
-
-enum Message:String {
+enum MessageType:String {
     case Invite = "invite-to-play"
     case ResponseInvite = "response-invite-to-play"
     case StartMatch = "start-match"
     case Bomb = "bomb"
-
+    
 }

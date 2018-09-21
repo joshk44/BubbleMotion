@@ -9,8 +9,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     class func startMultiplayerGameplay (){
-        let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "Gameplay")
-        self.present (loginViewController!, animated: true)
+        // let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "Gameplay")
+        // self.present (loginViewController!, animated: true)
+    }
+    
+    func showAlertAppDelegate(title : String,message : String,buttonTitle : String){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: buttonTitle, style: UIAlertAction.Style.default, handler: nil))
+        window!.rootViewController?.present(alert, animated: true, completion: nil)
+    }
+    
+    func showMultiplayerInvite (){
+        DispatchQueue.main.async {
+            
+            let alert = UIAlertController(title: "Invite", message: "You are invited to play ", preferredStyle: UIAlertController.Style.alert)
+            let OKAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction!) in
+                self.comunicationService.respondInvitationToPlay(response: true)
+            }
+            alert.addAction(OKAction)
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action:UIAlertAction!) in
+                self.comunicationService.respondInvitationToPlay(response: false)
+            }
+            alert.addAction(cancelAction)
+            
+            //self.window!.rootViewController?.present(alert, animated: true, completion: nil)
+            let navigationController = self.window!.rootViewController as! UINavigationController
+            let activeViewCont = navigationController.visibleViewController
+            activeViewCont?.present(alert, animated: true, completion: nil)
+            
+        }
     }
     
     @objc func applicationWillResignActive(_ application: UIApplication) {

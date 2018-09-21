@@ -20,7 +20,6 @@
 		E26BD6631A386AC600A8F1D6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E26BD6611A386AC600A8F1D6 /* Main.storyboard */; };
 		E26BD6651A386AC600A8F1D6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E26BD6641A386AC600A8F1D6 /* Images.xcassets */; };
 		E26BD6681A386AC600A8F1D6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E26BD6661A386AC600A8F1D6 /* LaunchScreen.xib */; };
-		E26BD6741A386AC600A8F1D6 /* SpriteKitSwiftAccelerometerTutorialTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26BD6731A386AC600A8F1D6 /* SpriteKitSwiftAccelerometerTutorialTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,7 +50,6 @@
 		E26BD6671A386AC600A8F1D6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		E26BD66D1A386AC600A8F1D6 /* BubbleMotionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BubbleMotionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E26BD6721A386AC600A8F1D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E26BD6731A386AC600A8F1D6 /* SpriteKitSwiftAccelerometerTutorialTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteKitSwiftAccelerometerTutorialTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,7 +160,6 @@
 		E26BD6701A386AC600A8F1D6 /* BubbleMotionTests */ = {
 			isa = PBXGroup;
 			children = (
-				E26BD6731A386AC600A8F1D6 /* SpriteKitSwiftAccelerometerTutorialTests.swift */,
 				E26BD6711A386AC600A8F1D6 /* Supporting Files */,
 			);
 			path = BubbleMotionTests;
@@ -297,7 +294,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E26BD6741A386AC600A8F1D6 /* SpriteKitSwiftAccelerometerTutorialTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -449,7 +445,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dharma.Motion;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -465,7 +461,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dharma.Motion;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -482,11 +478,10 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = SpriteKitSwiftAccelerometerTutorialTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ioscreator.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SpriteKitSwiftAccelerometerTutorial.app/SpriteKitSwiftAccelerometerTutorial";
+				TEST_HOST = "";
 			};
 			name = Debug;
 		};
@@ -498,11 +493,10 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = SpriteKitSwiftAccelerometerTutorialTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ioscreator.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SpriteKitSwiftAccelerometerTutorial.app/SpriteKitSwiftAccelerometerTutorial";
+				TEST_HOST = "";
 			};
 			name = Release;
 		};
