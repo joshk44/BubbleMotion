@@ -13,6 +13,7 @@ import MultipeerConnectivity
 protocol CommunicationServiceDelegate {
     
     func connectedDevicesChanged(manager : CommunicationService, connectedDevices: [String])
+    func startMatch ()
 }
 
 class CommunicationService : NSObject {
@@ -80,7 +81,7 @@ class CommunicationService : NSObject {
         send (message: jsonString!)
     }
     
-    func startMatch () {
+    func sendStartMatch () {
         
         let jsonMessage: [String: Any] = [
             "sender": self.myPeerId.displayName,
@@ -92,12 +93,10 @@ class CommunicationService : NSObject {
         let jsonString = String(data: jsonData, encoding: .utf8)
         send (message: jsonString!)
     }
-    
-    
-    
+
     
     func send(message : String) {
-        NSLog("%@", "sendBomb: \(message) to \(session.connectedPeers.count) peers")
+        NSLog("%@", "message sent: \(message) to \(session.connectedPeers.count) peers")
         
         if session.connectedPeers.count > 0 {
             do {
@@ -107,10 +106,7 @@ class CommunicationService : NSObject {
                 NSLog("%@", "Error for sending: \(error)")
             }
         }
-        
     }
-    
-    
 }
 
 extension CommunicationService : MCNearbyServiceAdvertiserDelegate {
@@ -167,16 +163,19 @@ extension CommunicationService : MCSessionDelegate {
         case MessageType.Invite.rawValue:
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             appDelegate.showMultiplayerInvite()
-            
         case MessageType.ResponseInvite.rawValue:
-            self.startMatch()
+            if (message.value == "true") {
+            self.sendStartMatch()
+            self.delegate?.startMatch ()
+            }
+        case MessageType.StartMatch.rawValue:
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.startMatch()
         default:
             NSLog("%@", "non process data: \(str)")
             
         }
-        
-        //self.delegate?.colorChanged(manager: self, colorString: str)
-    }
+            }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
         NSLog("%@", "didReceiveStream")

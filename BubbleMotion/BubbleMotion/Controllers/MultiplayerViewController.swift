@@ -51,5 +51,13 @@ extension MultiplayerViewController : CommunicationServiceDelegate {
         updateContrincantName (contrincants: connectedDevices)
     }
     
+    func startMatch () {
+        DispatchQueue.main.async {
+
+        let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "Gameplay")
+        self.present (loginViewController!, animated: true)
+        }
+    }
+    
     
 }
