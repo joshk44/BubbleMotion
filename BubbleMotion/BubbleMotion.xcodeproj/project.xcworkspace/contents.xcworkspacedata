@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:SpriteKitSwiftAccelerometerTutorial.xcodeproj">
+      location = "self:/Users/joseferreyra/Development/BubbleMotion/BubbleMotion/BubbleMotion.xcodeproj">
    </FileRef>
 </Workspace>
