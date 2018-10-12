@@ -46,6 +46,7 @@ class MultiplayerViewController: UIViewController {
 }
 
 extension MultiplayerViewController : CommunicationServiceDelegate {
+
     
     func connectedDevicesChanged(manager: CommunicationService, connectedDevices: [String]) {
         updateContrincantName (contrincants: connectedDevices)
@@ -59,5 +60,6 @@ extension MultiplayerViewController : CommunicationServiceDelegate {
         }
     }
     
-    
+    func bombReceived(bomb: GameState) {
+    }
 }

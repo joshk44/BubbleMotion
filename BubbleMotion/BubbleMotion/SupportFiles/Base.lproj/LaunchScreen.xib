@@ -15,9 +15,9 @@
             <rect key="frame" x="0.0" y="0.0" width="756" height="382"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background_menu" translatesAutoresizingMaskIntoConstraints="NO" id="li3-20-XRD">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background_menu" translatesAutoresizingMaskIntoConstraints="NO" id="li3-20-XRD">
                     <rect key="frame" x="0.0" y="0.0" width="756" height="382"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" image="bubble_happy" translatesAutoresizingMaskIntoConstraints="NO" id="XAs-mu-BAr">
                     <rect key="frame" x="327" y="139" width="102" height="105"/>

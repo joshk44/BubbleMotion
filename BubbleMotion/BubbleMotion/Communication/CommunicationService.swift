@@ -14,6 +14,8 @@ protocol CommunicationServiceDelegate {
     
     func connectedDevicesChanged(manager : CommunicationService, connectedDevices: [String])
     func startMatch ()
+    func bombReceived(bomb: GameState)
+    
 }
 
 class CommunicationService : NSObject {
@@ -89,6 +91,17 @@ class CommunicationService : NSObject {
             "value": "true"
         ]
         
+        let jsonData = try! JSONSerialization.data(withJSONObject: jsonMessage)
+        let jsonString = String(data: jsonData, encoding: .utf8)
+        send (message: jsonString!)
+    }
+    
+    func sendBomb (bomb: GameState) {
+        let jsonMessage: [String: Any] = [
+            "sender": self.myPeerId.displayName,
+            "messageType": MessageType.Bomb.rawValue,
+            "value": bomb.rawValue
+        ]
         let jsonData = try! JSONSerialization.data(withJSONObject: jsonMessage)
         let jsonString = String(data: jsonData, encoding: .utf8)
         send (message: jsonString!)
@@ -171,6 +184,8 @@ extension CommunicationService : MCSessionDelegate {
         case MessageType.StartMatch.rawValue:
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             appDelegate.startMatch()
+        case MessageType.Bomb.rawValue:
+            self.delegate?.bombReceived (bomb: GameState(rawValue: message.value)!)
         default:
             NSLog("%@", "non process data: \(str)")
             

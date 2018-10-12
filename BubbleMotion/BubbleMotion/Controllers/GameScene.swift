@@ -2,10 +2,22 @@ import SpriteKit
 import CoreMotion
 import AudioToolbox
 
+protocol GameSceneDelegate {
+    func sendBomb (bomb: GameState)
+}
+
 class GameScene: SKScene, SKPhysicsContactDelegate {
+    
+    let BOMB_TIME = 10
+    let NO_BOMB = -1
+    
     var bubble = SKSpriteNode()
     var platform = SKSpriteNode()
     var background = SKSpriteNode()
+    var remainingTime = SKLabelNode()
+    var points = SKLabelNode()
+    var bombButton = SKSpriteNode()
+    
     var motionManager = CMMotionManager()
     var destX:CGFloat  = 0.0
     var destY:CGFloat  = 0.0
@@ -18,22 +30,41 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var countdownTimer: Timer!
     var matchTime = 60
+    let matchLenght = 60
     var timeInContact = 0
     var timeOutContact = 0
+    var timeInContactTotal = 0
+    var bombtime = -1
     var gameState: GameState = GameState.Normal
-    var acelerationIndex: Double = 100;
+    var acelerationIndex: Double = 100
+    var currentAvailableBomb: GameState = GameState.Normal
+    
+    var delegateVC : GameSceneDelegate?
+
+
     
     override func didMove(to view: SKView) {
-        self.scaleMode = .aspectFill
-        let screenSize = UIScreen.main.bounds
+        let screenSize = view.frame.size
         
         startTimer()
         platform = (self.childNode(withName: "platform") as? SKSpriteNode)!
+        platform.position = CGPoint(x: screenSize.width/2, y: screenSize.height/2)
         platform.name = "platform"
         
         bubble = (self.childNode(withName: "bubble") as? SKSpriteNode)!
         bubble.name = "bubble"
         bubble.position = CGPoint(x: screenSize.width/2, y: screenSize.height/2)
+        
+        remainingTime = (self.childNode(withName: "timeOut") as? SKLabelNode)!
+        points = (self.childNode(withName: "points") as? SKLabelNode)!
+        
+        background = (self.childNode(withName: "background") as? SKSpriteNode)!
+        background.scale(to: CGSize(width: view.frame.size.width, height: view.frame.size.height))
+        background.position = CGPoint(x: screenSize.width/2, y: screenSize.height/2)
+        
+        bombButton  = (self.childNode(withName: "bombButton") as? SKSpriteNode)!
+        bombButton.position = CGPoint(x: screenSize.width - bombButton.size.width/2, y: 0 + bombButton.size.height/2)
+        
         
         self.physicsWorld.contactDelegate = self
         
@@ -64,14 +95,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     
                     if Double((data?.acceleration.y)!) != 0 {
                         let nextX = currentX - CGFloat((data?.acceleration.y)! * self.acelerationIndex)
-                        if (nextX - self.bubble.size.height/2 > 0 && nextX < screenSize.width - self.bubble.size.height) {
+                        if (nextX - self.bubble.size.height / 2 > 0 && nextX < screenSize.width - self.bubble.size.height / 2) {
                             self.destX = nextX
                         }
                     }
                     
                     if Double((data?.acceleration.x)!) != 0 {
                         let nextY = currentY + CGFloat((data?.acceleration.x)! * self.acelerationIndex)
-                        if (nextY - self.bubble.size.height > 0 && nextY < screenSize.height - self.bubble.size.height/2) {
+                        if (nextY - self.bubble.size.height / 2 > 0 && nextY < screenSize.height - self.bubble.size.height / 2) {
                             self.destY = nextY
                         }
                     }
@@ -80,8 +111,40 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch in touches {
+            let location = touch.location(in: self)
+            let node : SKNode = self.atPoint(location)
+            if node.name == "bombButton" {
+                if (currentAvailableBomb != GameState.Normal){
+                    delegateVC!.sendBomb(bomb: currentAvailableBomb)
+                    currentAvailableBomb = GameState.Normal
+                    self.bombButton.texture = SKTexture(imageNamed: "normal")
+                }
+            }
+        }
+    }
+    
+    
+    func setBomb (bomb: GameState){
+        bombtime = BOMB_TIME;
+        self.applyNormalState()
+        switch bomb {
+        case GameState.Frozen:
+            self.applyFrozenEffect()
+        case GameState.GravityZero:
+            self.applyZeroGravityEffect()
+        case GameState.Focus:
+            self.applyFocusEffect()
+        case GameState.Magnet:
+            self.applyMagnetEffect()
+        default:
+            print ("switch error")
+        }
+    }
+    
     func didEnd(_ contact: SKPhysicsContact){
-        print("collided! didEnd")
+        //print("collided! didEnd")
         self.isInContact = false
         self.timeInContact = 0
         self.timeOutContact = 0
@@ -91,7 +154,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     func didBegin(_ contact: SKPhysicsContact) {
-        print("collided! didBegin")
+        //print("collided! didBegin")
         self.isInContact = true
         self.timeInContact = 0
         self.timeOutContact = 0
@@ -160,16 +223,54 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     @objc func updateTime() {
+        multiplayerRules ()
+    }
+    
+    func multiplayerRules () {
+        self.remainingTime.text = "\(matchTime)"
+        
+        
+        if (self.isInContact) {
+            self.timeInContactTotal += 1
+        }
         
         if (self.isInContact) {
             self.timeInContact += 1
-        } else {
-            self.timeOutContact += 1
         }
         
-        if (timeOutContact == 3 ) {
-            applyMagnetEffect ()
+        if (self.bombtime > 0) {
+            self.bombtime-=1;
+        } else if (self.bombtime == 0){
+            self.applyNormalState()
+            self.bombtime = NO_BOMB
         }
+        
+        if (self.timeInContact > 9){
+            if (self.currentAvailableBomb == GameState.Normal){
+                switch Int.random(in: 0 ... 3) {
+                case 0:
+                    self.currentAvailableBomb = GameState.Frozen
+                    self.bombButton.texture = SKTexture(imageNamed: "frozen")
+                case 1:
+                    self.currentAvailableBomb = GameState.GravityZero
+                    self.bombButton.texture = SKTexture(imageNamed: "gravity")
+                case 2:
+                    self.currentAvailableBomb = GameState.Focus
+                    self.bombButton.texture = SKTexture(imageNamed: "focus")
+                case 3:
+                    self.currentAvailableBomb = GameState.Magnet
+                    self.bombButton.texture = SKTexture(imageNamed: "magnet")
+                default:
+                    print ("switch error")
+                }
+                print (self.currentAvailableBomb.rawValue)
+                
+            }
+        }
+        
+        let currentPoints = (self.timeInContactTotal * 10 ) - ((self.matchLenght - self.matchTime - self.timeInContactTotal)  * 2)
+        
+        self.points.text = "\(currentPoints)"
         
         if matchTime != 0 {
             matchTime -= 1
@@ -177,31 +278,37 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             endTimer()
         }
     }
+
     
     func endTimer() {
         countdownTimer.invalidate()
     }
     
     func applyFrozenEffect () {
+        print ("applyFrozenEffect")
         self.gameState = GameState.Frozen
         acelerationIndex = 10;
     }
     
     func applyFocusEffect () {
+        print ("applyFocusEffect")
         self.gameState = GameState.Focus
         self.platform.scale(to: CGSize(width: 100, height: 100))
     }
     
     func applyZeroGravityEffect () {
+        print ("applyZeroGravityEffect")
         self.gameState = GameState.GravityZero
         self.acelerationIndex = 300;
     }
     
     func applyMagnetEffect () {
+        print ("applyMagnetEffect")
         self.gameState = GameState.Magnet
     }
     
     func applyNormalState () {
+        print ("applyNormalState")
         self.gameState = GameState.Normal
         acelerationIndex = 100;
         self.platform.scale(to: CGSize(width: 160, height: 160))
@@ -209,10 +316,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
 }
 
-enum GameState {
-    case Normal
-    case Frozen
-    case GravityZero
-    case Focus
-    case Magnet
+enum GameState : String {
+    case Normal = "Nomral"
+    case Frozen = "Frozen"
+    case GravityZero = "GravityZero"
+    case Focus = "Focus"
+    case Magnet = "Magnet"
 }
