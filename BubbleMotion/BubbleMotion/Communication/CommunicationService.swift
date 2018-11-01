@@ -15,7 +15,7 @@ protocol CommunicationServiceDelegate {
     func connectedDevicesChanged(manager : CommunicationService, connectedDevices: [String])
     func startMatch ()
     func bombReceived(bomb: GameState)
-    
+    func finishMatch (points: Int)
 }
 
 class CommunicationService : NSObject {
@@ -106,6 +106,17 @@ class CommunicationService : NSObject {
         let jsonString = String(data: jsonData, encoding: .utf8)
         send (message: jsonString!)
     }
+    
+    func sendResults (points: Int){
+        let jsonMessage: [String: Any] = [
+            "sender": self.myPeerId.displayName,
+            "messageType": MessageType.FinishMatch.rawValue,
+            "value": "\(points)"
+        ]
+        let jsonData = try! JSONSerialization.data(withJSONObject: jsonMessage)
+        let jsonString = String(data: jsonData, encoding: .utf8)
+        send (message: jsonString!)
+    }
 
     
     func send(message : String) {
@@ -169,9 +180,9 @@ extension CommunicationService : MCSessionDelegate {
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         
         let str = String(data: data, encoding: .utf8)!
-        //NSLog("%@", "didReceiveData: \(str)")
         let message = parseJSON (data: data)
-        
+        print ( "messsage type: \(message.messageType)")
+
         switch message.messageType {
         case MessageType.Invite.rawValue:
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -186,6 +197,8 @@ extension CommunicationService : MCSessionDelegate {
             appDelegate.startMatch()
         case MessageType.Bomb.rawValue:
             self.delegate?.bombReceived (bomb: GameState(rawValue: message.value)!)
+        case MessageType.FinishMatch.rawValue:
+            self.delegate?.finishMatch (points: Int(message.value)!)
         default:
             NSLog("%@", "non process data: \(str)")
             
@@ -229,5 +242,5 @@ enum MessageType:String {
     case ResponseInvite = "response-invite-to-play"
     case StartMatch = "start-match"
     case Bomb = "bomb"
-    
+    case FinishMatch = "finish-match"
 }

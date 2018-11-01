@@ -54,7 +54,6 @@ extension MultiplayerViewController : CommunicationServiceDelegate {
     
     func startMatch () {
         DispatchQueue.main.async {
-
         let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "Gameplay")
         self.present (loginViewController!, animated: true)
         }
@@ -62,4 +61,8 @@ extension MultiplayerViewController : CommunicationServiceDelegate {
     
     func bombReceived(bomb: GameState) {
     }
+    
+    func finishMatch (points: Int) {
+    }
+
 }

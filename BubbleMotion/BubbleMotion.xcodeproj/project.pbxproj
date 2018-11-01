@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		551816942146C2CB009F2E20 /* CommunicationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551816932146C2CB009F2E20 /* CommunicationService.swift */; };
 		55181696214798DB009F2E20 /* MultiplayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55181695214798DB009F2E20 /* MultiplayerViewController.swift */; };
+		5567D1172171B6B100AC9A0F /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5567D1162171B6B100AC9A0F /* ResultsViewController.swift */; };
 		5570BE692126934600990D74 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5570BE682126934500990D74 /* LoginViewController.swift */; };
 		55CB42B82127E2D900479FD2 /* SelectTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CB42B72127E2D900479FD2 /* SelectTypeViewController.swift */; };
 		55CB42CA212BDC3200479FD2 /* ViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CB42C9212BDC3200479FD2 /* ViewUtils.swift */; };
@@ -35,6 +36,7 @@
 /* Begin PBXFileReference section */
 		551816932146C2CB009F2E20 /* CommunicationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunicationService.swift; sourceTree = "<group>"; };
 		55181695214798DB009F2E20 /* MultiplayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplayerViewController.swift; sourceTree = "<group>"; };
+		5567D1162171B6B100AC9A0F /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		5570BE682126934500990D74 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		55CB42B72127E2D900479FD2 /* SelectTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTypeViewController.swift; sourceTree = "<group>"; };
 		55CB42C9212BDC3200479FD2 /* ViewUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUtils.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 				5570BE682126934500990D74 /* LoginViewController.swift */,
 				55CB42B72127E2D900479FD2 /* SelectTypeViewController.swift */,
 				55181695214798DB009F2E20 /* MultiplayerViewController.swift */,
+				5567D1162171B6B100AC9A0F /* ResultsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -281,6 +284,7 @@
 				55CB42CA212BDC3200479FD2 /* ViewUtils.swift in Sources */,
 				E26BD65E1A386AC600A8F1D6 /* GameScene.swift in Sources */,
 				55EC315C212167AA00AF4D43 /* GradientView.swift in Sources */,
+				5567D1172171B6B100AC9A0F /* ResultsViewController.swift in Sources */,
 				E26BD6601A386AC600A8F1D6 /* GameViewController.swift in Sources */,
 				551816942146C2CB009F2E20 /* CommunicationService.swift in Sources */,
 				5570BE692126934600990D74 /* LoginViewController.swift in Sources */,

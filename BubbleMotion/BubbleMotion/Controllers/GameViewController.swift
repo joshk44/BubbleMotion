@@ -92,11 +92,24 @@ extension GameViewController : CommunicationServiceDelegate {
         print ("bomb received", bomb.rawValue)
     }
     
+    func finishMatch (points: Int) {
+        print ("bomb received", points)
+        DispatchQueue.main.async {
+            let resultViewController: ResultsViewController = self.storyboard?.instantiateViewController(withIdentifier: "Results") as! ResultsViewController
+            resultViewController.myPoints = self.scene.myPoints
+            resultViewController.contrincantPoints = points
+            self.present (resultViewController, animated: true)
+        }
+    }
 }
 
 extension GameViewController : GameSceneDelegate {
     
-    func sendBomb(bomb: GameState) {
+    func sendBomb (bomb: GameState) {
         comunicationService.sendBomb (bomb : bomb)
+    }
+    
+    func sendFinishMatch (points: Int){
+        comunicationService.sendResults (points: points)
     }
 }

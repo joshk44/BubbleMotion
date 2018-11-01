@@ -4,6 +4,7 @@ import AudioToolbox
 
 protocol GameSceneDelegate {
     func sendBomb (bomb: GameState)
+    func sendFinishMatch (points: Int)
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
@@ -38,6 +39,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var gameState: GameState = GameState.Normal
     var acelerationIndex: Double = 100
     var currentAvailableBomb: GameState = GameState.Normal
+    var myPoints = 0
     
     var delegateVC : GameSceneDelegate?
 
@@ -65,7 +67,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         bombButton  = (self.childNode(withName: "bombButton") as? SKSpriteNode)!
         bombButton.position = CGPoint(x: screenSize.width - bombButton.size.width/2, y: 0 + bombButton.size.height/2)
         
-        
         self.physicsWorld.contactDelegate = self
         
         if motionManager.isAccelerometerAvailable == true {
@@ -80,13 +81,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     
                     if Double((data?.acceleration.x)!) != 0 {
                         let nextX = currentX - CGFloat((data?.acceleration.x)! * self.acelerationIndex)
-                        if (nextX - self.bubble.size.height/2 > 0 && nextX < screenSize.width - self.bubble.size.height) {
+                        if (nextX - self.bubble.size.height / 2 > 0 && nextX < screenSize.width - self.bubble.size.height) {
                             self.destX = nextX
                         }
                     }
                     if Double((data?.acceleration.y)!) != 0 {
                         let nextY = currentY + CGFloat((data?.acceleration.y)! * self.acelerationIndex)
-                        if (nextY - self.bubble.size.height > 0 && nextY < screenSize.height - self.bubble.size.height/2) {
+                        if (nextY - self.bubble.size.height > 0 && nextY < screenSize.height - self.bubble.size.height / 2) {
                             self.destY = nextY
                         }
                     }
@@ -120,6 +121,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     delegateVC!.sendBomb(bomb: currentAvailableBomb)
                     currentAvailableBomb = GameState.Normal
                     self.bombButton.texture = SKTexture(imageNamed: "normal")
+                    self.timeInContact = 0
                 }
             }
         }
@@ -190,7 +192,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         lastUpdateTime = currentTime
         doSomethingTimer += deltaTime
         
-        if doSomethingTimer >= 5.0 {
+        if Int(doSomethingTimer) >= Int.random(in: 1 ... 5) {
             if (!isBlinking) {
                 isBlinking = true
             }
@@ -229,7 +231,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func multiplayerRules () {
         self.remainingTime.text = "\(matchTime)"
         
-        
         if (self.isInContact) {
             self.timeInContactTotal += 1
         }
@@ -239,7 +240,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         if (self.bombtime > 0) {
-            self.bombtime-=1;
+            self.bombtime -= 1
         } else if (self.bombtime == 0){
             self.applyNormalState()
             self.bombtime = NO_BOMB
@@ -268,20 +269,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
         
-        let currentPoints = (self.timeInContactTotal * 10 ) - ((self.matchLenght - self.matchTime - self.timeInContactTotal)  * 2)
+        myPoints = (self.timeInContactTotal * 10 ) - ((self.matchLenght - self.matchTime - self.timeInContactTotal)  * 2)
         
-        self.points.text = "\(currentPoints)"
+        self.points.text = "\(myPoints)"
         
-        if matchTime != 0 {
+        if matchTime > 0 {
             matchTime -= 1
-        } else {
+            print ("matchTime non 0")
+        } else if matchTime == 0 {
             endTimer()
+            matchTime -= 1
+            delegateVC!.sendFinishMatch (points: myPoints)
+            print ("matchTime 0")
+
         }
     }
 
     
     func endTimer() {
         countdownTimer.invalidate()
+        countdownTimer = nil
+        print ("endTimer")
     }
     
     func applyFrozenEffect () {
