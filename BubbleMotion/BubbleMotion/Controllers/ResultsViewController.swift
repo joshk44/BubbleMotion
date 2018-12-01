@@ -22,9 +22,9 @@ class ResultsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        matchResult.text = (myPoints >= contrincantPoints) ? "YOU WIN" : "YOU LOSE"
-        myPointsResult.text = "Your points: \(myPoints)"
-        contrincantPointsResult.text = "Contrincant points: \(contrincantPoints)"
+        matchResult.text = (myPoints >= contrincantPoints) ? "Ganaste!!" : "Perdiste 😰"
+        myPointsResult.text = "Tus puntos: \(myPoints)"
+        contrincantPointsResult.text = "Contrincante: \(contrincantPoints)"
 
     }
 
@@ -33,3 +33,4 @@ class ResultsViewController: UIViewController {
         self.present (viewController!, animated: true)
     }
 }
+

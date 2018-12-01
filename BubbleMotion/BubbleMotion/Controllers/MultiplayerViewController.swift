@@ -21,7 +21,7 @@ class MultiplayerViewController: UIViewController {
         comunicationService = appDelegate.comunicationService
         let contrincant = comunicationService.contrincant
         if (contrincant.isEmpty) {
-            contrincantName.text = "Waiting for bubbles..."
+            contrincantName.text = "Esperando burbujas..."
         } else {
             contrincantName.text = contrincant
         }
@@ -38,7 +38,7 @@ class MultiplayerViewController: UIViewController {
             if (contrincants.count > 0) {
                 self.contrincantName.text =  contrincants[0]
             } else {
-                self.contrincantName.text =  "No device connected"
+                self.contrincantName.text =  "Parece que no hay burbujas cerca..."
             }
         })
     }

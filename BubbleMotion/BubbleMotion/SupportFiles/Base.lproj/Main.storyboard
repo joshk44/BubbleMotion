@@ -150,10 +150,10 @@
             </objects>
             <point key="canvasLocation" x="2090" y="70"/>
         </scene>
-        <!--SelectType-->
+        <!--Seleccionar tipo de juego-->
         <scene sceneID="rsm-gG-ziW">
             <objects>
-                <viewController storyboardIdentifier="SelectType" title="SelectType" hidesBottomBarWhenPushed="YES" id="cLu-l7-D7k" customClass="SelectTypeViewController" customModule="BubbleMotion" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SelectType" title="Seleccionar tipo de juego" hidesBottomBarWhenPushed="YES" id="cLu-l7-D7k" customClass="SelectTypeViewController" customModule="BubbleMotion" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mKO-yI-CV0"/>
                         <viewControllerLayoutGuide type="bottom" id="lcI-vY-YzE"/>
@@ -230,10 +230,10 @@
             </objects>
             <point key="canvasLocation" x="116.74876847290641" y="40.799999999999997"/>
         </scene>
-        <!--Start Playing-->
+        <!--Empezar a Jugar-->
         <scene sceneID="Jks-gN-9Oh">
             <objects>
-                <viewController storyboardIdentifier="Multiplayer" title="Start Playing" hidesBottomBarWhenPushed="YES" id="ww0-hH-R9x" customClass="MultiplayerViewController" customModule="BubbleMotion" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Multiplayer" title="Empezar a Jugar" hidesBottomBarWhenPushed="YES" id="ww0-hH-R9x" customClass="MultiplayerViewController" customModule="BubbleMotion" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="KtI-vt-N6J"/>
                         <viewControllerLayoutGuide type="bottom" id="M4m-5x-K5C"/>
@@ -258,31 +258,16 @@
                                 <rect key="frame" x="124" y="38.666666666666657" width="564" height="298"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L9G-Nx-H1i">
-                                        <rect key="frame" x="44" y="66" width="475" height="87"/>
+                                        <rect key="frame" x="44" y="66" width="475" height="133"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="475" id="7jZ-xa-R53"/>
-                                            <constraint firstAttribute="height" constant="87" id="l3x-2P-11M"/>
+                                            <constraint firstAttribute="height" constant="133" id="l3x-2P-11M"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="46"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FA2-7j-wDv">
-                                        <rect key="frame" x="44" y="189" width="475" height="36"/>
-                                        <color key="backgroundColor" red="0.18823529410000001" green="0.4941176471" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="36" id="1IG-MV-By9"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="36" id="gn7-Jq-tD9"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" title="Play!">
-                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="performPlay:" destination="ww0-hH-R9x" eventType="touchUpInside" id="xeo-BI-ron"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your bubble contrincant will be:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K5b-L1-xaV">
-                                        <rect key="frame" x="44.000000000000014" y="25" width="237.33333333333337" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contrincantes:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K5b-L1-xaV">
+                                        <rect key="frame" x="44" y="25" width="111" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="KxY-JA-uBt"/>
                                         </constraints>
@@ -290,19 +275,34 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FA2-7j-wDv">
+                                        <rect key="frame" x="44" y="226.00000000000003" width="475" height="35.999999999999972"/>
+                                        <color key="backgroundColor" red="0.18823529410000001" green="0.4941176471" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="36" id="1IG-MV-By9"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="36" id="gn7-Jq-tD9"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Jugar!">
+                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="performPlay:" destination="ww0-hH-R9x" eventType="touchUpInside" id="xeo-BI-ron"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="L9G-Nx-H1i" secondAttribute="trailing" constant="45" id="5J5-bx-MsQ"/>
-                                    <constraint firstAttribute="bottom" secondItem="FA2-7j-wDv" secondAttribute="bottom" constant="73" id="6hz-Jj-S1k"/>
+                                    <constraint firstAttribute="bottom" secondItem="FA2-7j-wDv" secondAttribute="bottom" constant="36" id="6hz-Jj-S1k"/>
                                     <constraint firstItem="K5b-L1-xaV" firstAttribute="leading" secondItem="6Yc-5g-GuW" secondAttribute="leading" constant="44" id="790-Oh-KPK"/>
                                     <constraint firstItem="FA2-7j-wDv" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="L9G-Nx-H1i" secondAttribute="trailing" id="I0H-Hz-4VO"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="K5b-L1-xaV" secondAttribute="trailing" constant="20" symbolic="YES" id="Pmx-su-5eW"/>
                                     <constraint firstItem="FA2-7j-wDv" firstAttribute="centerX" secondItem="L9G-Nx-H1i" secondAttribute="centerX" id="XQg-Mm-47Y"/>
-                                    <constraint firstItem="FA2-7j-wDv" firstAttribute="top" secondItem="L9G-Nx-H1i" secondAttribute="bottom" constant="36" id="Xjt-B3-TSt"/>
+                                    <constraint firstItem="FA2-7j-wDv" firstAttribute="top" secondItem="L9G-Nx-H1i" secondAttribute="bottom" constant="27.000000000000028" id="Xjt-B3-TSt"/>
                                     <constraint firstItem="FA2-7j-wDv" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="L9G-Nx-H1i" secondAttribute="leading" id="bjE-Wu-Mx7"/>
                                     <constraint firstItem="K5b-L1-xaV" firstAttribute="top" secondItem="6Yc-5g-GuW" secondAttribute="top" constant="25" id="cn5-AQ-Wcv"/>
                                     <constraint firstItem="L9G-Nx-H1i" firstAttribute="top" secondItem="6Yc-5g-GuW" secondAttribute="top" constant="66" id="kq7-mD-qeh"/>
-                                    <constraint firstItem="FA2-7j-wDv" firstAttribute="top" secondItem="L9G-Nx-H1i" secondAttribute="bottom" constant="36" id="tKV-T8-k0e"/>
+                                    <constraint firstItem="FA2-7j-wDv" firstAttribute="top" secondItem="L9G-Nx-H1i" secondAttribute="bottom" constant="27.000000000000028" id="tKV-T8-k0e"/>
                                     <constraint firstItem="L9G-Nx-H1i" firstAttribute="leading" secondItem="6Yc-5g-GuW" secondAttribute="leading" constant="44" id="zNA-9z-52D"/>
                                 </constraints>
                             </view>
@@ -388,7 +388,7 @@
                                             <constraint firstAttribute="height" constant="36" id="ySP-Av-qsQ"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" title="Back to home">
+                                        <state key="normal" title="Volver al home 🏠">
                                             <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>

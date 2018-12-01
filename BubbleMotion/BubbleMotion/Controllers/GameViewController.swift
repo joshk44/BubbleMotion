@@ -8,7 +8,6 @@ extension SKNode {
 
            //var sceneData = NSData(contentsOfFile: path, options: .DataReadingMappedIfSafe, error: nil)!
             let archiver = NSKeyedUnarchiver(forReadingWith: sceneData as Data)
-            
             archiver.setClass(self.classForKeyedUnarchiver(), forClassName: "SKScene")
             let scene = archiver.decodeObject(forKey: NSKeyedArchiveRootObjectKey) as! GameScene
             archiver.finishDecoding()
@@ -29,6 +28,13 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         comunicationService = appDelegate.comunicationService
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.willResignActiveNotification, object: nil)
+    }
+    
+    @objc func appMovedToBackground() {
+        self.sendFinishMatch(points: 0)
+        finishMatch(points: 0)
     }
 
     override func viewWillLayoutSubviews() {
@@ -89,11 +95,11 @@ extension GameViewController : CommunicationServiceDelegate {
     
     func bombReceived(bomb: GameState) {
         scene.setBomb (bomb: bomb);
-        print ("bomb received", bomb.rawValue)
+        print ("Bomb received", bomb.rawValue)
     }
     
     func finishMatch (points: Int) {
-        print ("bomb received", points)
+        print ("Finish match", points)
         DispatchQueue.main.async {
             let resultViewController: ResultsViewController = self.storyboard?.instantiateViewController(withIdentifier: "Results") as! ResultsViewController
             resultViewController.myPoints = self.scene.myPoints

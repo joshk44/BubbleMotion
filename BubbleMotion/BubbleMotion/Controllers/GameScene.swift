@@ -16,6 +16,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var platform = SKSpriteNode()
     var background = SKSpriteNode()
     var remainingTime = SKLabelNode()
+    var bombReceived = SKLabelNode()
     var points = SKLabelNode()
     var bombButton = SKSpriteNode()
     
@@ -55,10 +56,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         bubble = (self.childNode(withName: "bubble") as? SKSpriteNode)!
         bubble.name = "bubble"
-        bubble.position = CGPoint(x: screenSize.width/2, y: screenSize.height/2)
+        destX = screenSize.width/2
+        destY = screenSize.height/2
         
         remainingTime = (self.childNode(withName: "timeOut") as? SKLabelNode)!
         points = (self.childNode(withName: "points") as? SKLabelNode)!
+        
+        bombReceived = (self.childNode(withName: "bombReceived") as? SKLabelNode)!
+        bombReceived.position = CGPoint(x: screenSize.width/2, y: 30)
+
         
         background = (self.childNode(withName: "background") as? SKSpriteNode)!
         background.scale(to: CGSize(width: view.frame.size.width, height: view.frame.size.height))
@@ -127,7 +133,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    
     func setBomb (bomb: GameState){
         bombtime = BOMB_TIME;
         self.applyNormalState()
@@ -143,6 +148,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         default:
             print ("switch error")
         }
+        updateBombReceivedLabel ()
     }
     
     func didEnd(_ contact: SKPhysicsContact){
@@ -241,6 +247,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if (self.bombtime > 0) {
             self.bombtime -= 1
+            updateBombReceivedLabel ();
         } else if (self.bombtime == 0){
             self.applyNormalState()
             self.bombtime = NO_BOMB
@@ -281,8 +288,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             matchTime -= 1
             delegateVC!.sendFinishMatch (points: myPoints)
             print ("matchTime 0")
-
         }
+        print (self.gameState.rawValue)
     }
 
     
@@ -322,6 +329,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.platform.scale(to: CGSize(width: 160, height: 160))
     }
     
+    func updateBombReceivedLabel () {
+        if (bombtime>0) {
+            self.bombReceived.text = "\(gameState.rawValue.capitalized) recibido termina en: \(bombtime)"
+        } else {
+            self.bombReceived.text = ""
+        }
+    }
 }
 
 enum GameState : String {
