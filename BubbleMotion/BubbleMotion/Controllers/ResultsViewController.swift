@@ -25,12 +25,30 @@ class ResultsViewController: UIViewController {
         matchResult.text = (myPoints >= contrincantPoints) ? "Ganaste!!" : "Perdiste 😰"
         myPointsResult.text = "Tus puntos: \(myPoints)"
         contrincantPointsResult.text = "Contrincante: \(contrincantPoints)"
-
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
-
+    
     @IBAction func backToHome(_ sender: Any) {
-        let viewController = self.storyboard?.instantiateViewController(withIdentifier: "Multiplayer")
-        self.present (viewController!, animated: true)
+        navigateToRootAndRemoveResults ()
+    }
+    
+    func navigateToRootAndRemoveResults () {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let navigationController = appDelegate.window!.rootViewController as! UINavigationController
+        var stack = navigationController.viewControllers
+        // let viewController = self.storyboard?.instantiateViewController(withIdentifier: "SelectType")
+        var i = 0
+        for views in stack {
+            if ( views is ResultsViewController ) {
+                stack.remove(at: i)
+            } else {
+                i = i + 1
+            }
+        }
+        navigationController.setViewControllers(stack, animated: false)
+        print ("Count backToHome: \(navigationController.viewControllers.count)")
+        
+        navigationController.popToRootViewController(animated: false)
     }
 }
 

@@ -54,8 +54,10 @@ extension MultiplayerViewController : CommunicationServiceDelegate {
     
     func startMatch () {
         DispatchQueue.main.async {
-        let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "Gameplay")
-        self.present (loginViewController!, animated: true)
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let navigationController = appDelegate.window!.rootViewController as! UINavigationController
+            let viewController = self.storyboard?.instantiateViewController(withIdentifier: "Gameplay")
+            navigationController.pushViewController(viewController!, animated: true)
         }
     }
     

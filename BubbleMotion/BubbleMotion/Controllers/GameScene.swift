@@ -168,7 +168,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.timeOutContact = 0
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
         updateBubble()
-        applyNormalState ()
+        //applyNormalState ()
     }
     
     func updateBubble () {
@@ -294,9 +294,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     
     func endTimer() {
-        countdownTimer.invalidate()
-        countdownTimer = nil
-        print ("endTimer")
+        if (countdownTimer != nil) {
+            countdownTimer.invalidate()
+            countdownTimer = nil
+        }
     }
     
     func applyFrozenEffect () {

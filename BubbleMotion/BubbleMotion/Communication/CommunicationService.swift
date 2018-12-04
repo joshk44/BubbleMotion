@@ -185,8 +185,10 @@ extension CommunicationService : MCSessionDelegate {
 
         switch message.messageType {
         case MessageType.Invite.rawValue:
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.showMultiplayerInvite()
+            DispatchQueue.main.async {
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.showMultiplayerInvite()
+            }
         case MessageType.ResponseInvite.rawValue:
             if (message.value == "true") {
             self.sendStartMatch()

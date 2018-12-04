@@ -13,11 +13,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let navigationController = self.window!.rootViewController as! UINavigationController
         let activeViewCont = navigationController.visibleViewController
-        let loginViewController = activeViewCont!.storyboard?.instantiateViewController(withIdentifier: "Gameplay")
-        activeViewCont!.present (loginViewController!, animated: true)
+        let viewController = activeViewCont!.storyboard?.instantiateViewController(withIdentifier: "Gameplay")
+        navigationController.pushViewController(viewController!, animated: true)
         }
     }
-    
     
     func showMultiplayerInvite (){
         DispatchQueue.main.async {
@@ -42,6 +41,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     @objc func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+        let navigationController = self.window!.rootViewController as! UINavigationController
+        let visibleViewController = navigationController.visibleViewController
+        if ( visibleViewController is GameViewController ) {
+            (visibleViewController as! GameViewController).sendFinishMatch(points: 0)
+            (visibleViewController as! GameViewController).finishMatch(points: 0)
+        }
     }
     
     @objc func applicationDidEnterBackground(_ application: UIApplication) {

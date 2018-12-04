@@ -5,7 +5,6 @@ extension SKNode {
     class func unarchiveFromFile(file : String) -> SKNode? {
         if let path = Bundle.main.path(forResource: file, ofType: "sks") {
             let sceneData = try! NSData(contentsOfFile: path, options: .mappedIfSafe)
-            
             //let sceneData = try! Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
             //var sceneData = NSData(contentsOfFile: path, options: .DataReadingMappedIfSafe, error: nil)!
             //let archiver = try! NSKeyedUnarchiver(forReadingWith: sceneData as Data)
@@ -31,13 +30,21 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         comunicationService = appDelegate.comunicationService
-        let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.willResignActiveNotification, object: nil)
+       // let notificationCenter = NotificationCenter.default
+       // notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.willResignActiveNotification, object: nil)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
+
     
     @objc func appMovedToBackground() {
-        self.sendFinishMatch(points: 0)
-        finishMatch(points: 0)
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let navigationController = appDelegate.window!.rootViewController as! UINavigationController
+        
+        if ( navigationController.visibleViewController is GameViewController ) {
+            self.sendFinishMatch(points: 0)
+            finishMatch(points: 0)
+        }
+        
     }
 
     override func viewWillLayoutSubviews() {
@@ -104,10 +111,13 @@ extension GameViewController : CommunicationServiceDelegate {
     func finishMatch (points: Int) {
         print ("Finish match", points)
         DispatchQueue.main.async {
+            //self.scene.endTimer()
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let navigationController = appDelegate.window!.rootViewController as! UINavigationController
             let resultViewController: ResultsViewController = self.storyboard?.instantiateViewController(withIdentifier: "Results") as! ResultsViewController
             resultViewController.myPoints = self.scene.myPoints
             resultViewController.contrincantPoints = points
-            self.present (resultViewController, animated: true)
+            navigationController.pushViewController(resultViewController, animated: false)
         }
     }
 }
