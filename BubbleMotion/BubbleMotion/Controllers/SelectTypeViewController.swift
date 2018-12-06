@@ -13,6 +13,7 @@ class SelectTypeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     @IBAction func startSinglePlayer(_ sender: Any) {
@@ -20,6 +21,14 @@ class SelectTypeViewController: UIViewController {
         let navigationController = appDelegate.window!.rootViewController as! UINavigationController
         let viewController = self.storyboard?.instantiateViewController(withIdentifier: "Gameplay")
         navigationController.pushViewController(viewController!, animated: true)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if self.isMovingFromParent {
+            UserDefaultsManager.loggedUserValue = UIDevice.current.name
+        }
     }
 }
 

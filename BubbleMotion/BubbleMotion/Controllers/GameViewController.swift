@@ -111,13 +111,13 @@ extension GameViewController : CommunicationServiceDelegate {
     func finishMatch (points: Int) {
         print ("Finish match", points)
         DispatchQueue.main.async {
-            //self.scene.endTimer()
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             let navigationController = appDelegate.window!.rootViewController as! UINavigationController
             let resultViewController: ResultsViewController = self.storyboard?.instantiateViewController(withIdentifier: "Results") as! ResultsViewController
             resultViewController.myPoints = self.scene.myPoints
             resultViewController.contrincantPoints = points
             navigationController.pushViewController(resultViewController, animated: false)
+            self.scene.endTimer()
         }
     }
 }

@@ -24,7 +24,7 @@ class CommunicationService : NSObject {
     // and can contain only ASCII lowercase letters, numbers and hyphens.
     private let CommServiceType = "communic-bubble"
     
-    private let myPeerId = MCPeerID(displayName: UIDevice.current.name)
+    private let myPeerId = MCPeerID(displayName: UserDefaultsManager.loggedUserValue)
     private let serviceAdvertiser : MCNearbyServiceAdvertiser
     private let serviceBrowser : MCNearbyServiceBrowser
     
@@ -55,7 +55,6 @@ class CommunicationService : NSObject {
         self.serviceAdvertiser.stopAdvertisingPeer()
         self.serviceBrowser.stopBrowsingForPeers()
     }
-    
     
     func sendInvitationToPlay () {
         
@@ -195,8 +194,10 @@ extension CommunicationService : MCSessionDelegate {
             self.delegate?.startMatch ()
             }
         case MessageType.StartMatch.rawValue:
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.startMatch()
+            DispatchQueue.main.async {
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.startMatch()
+            }
         case MessageType.Bomb.rawValue:
             self.delegate?.bombReceived (bomb: GameState(rawValue: message.value)!)
         case MessageType.FinishMatch.rawValue:

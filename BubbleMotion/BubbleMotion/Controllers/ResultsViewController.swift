@@ -13,7 +13,7 @@ class ResultsViewController: UIViewController {
     
     var myPoints: Int = 0
     var contrincantPoints: Int = 0
-    
+    var contrincantName: String = ""
     
     @IBOutlet weak var matchResult: UILabel!
     @IBOutlet weak var myPointsResult: UILabel!
@@ -26,11 +26,16 @@ class ResultsViewController: UIViewController {
         myPointsResult.text = "Tus puntos: \(myPoints)"
         contrincantPointsResult.text = "Contrincante: \(contrincantPoints)"
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+        let currentUser: String = UserDefaultsManager.loggedUserValue
+        UserDefaultsManager.addHistory(array: [currentUser, contrincantName, "\(contrincantPoints)", "\(myPoints)"])
     }
     
     @IBAction func backToHome(_ sender: Any) {
         navigateToRootAndRemoveResults ()
+        print (UserDefaultsManager.history[0][2])
     }
+    
+
     
     func navigateToRootAndRemoveResults () {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
