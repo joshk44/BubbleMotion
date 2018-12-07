@@ -15,7 +15,7 @@ protocol CommunicationServiceDelegate {
     func connectedDevicesChanged(manager : CommunicationService, connectedDevices: [String])
     func startMatch ()
     func bombReceived(bomb: GameState)
-    func finishMatch (points: Int)
+    func finishMatch (points: Int, contrincant: String)
 }
 
 class CommunicationService : NSObject {
@@ -201,7 +201,7 @@ extension CommunicationService : MCSessionDelegate {
         case MessageType.Bomb.rawValue:
             self.delegate?.bombReceived (bomb: GameState(rawValue: message.value)!)
         case MessageType.FinishMatch.rawValue:
-            self.delegate?.finishMatch (points: Int(message.value)!)
+            self.delegate?.finishMatch (points: Int(message.value)!, contrincant: String(message.sender))
         default:
             NSLog("%@", "non process data: \(str)")
             

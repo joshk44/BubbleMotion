@@ -35,7 +35,7 @@ class GameViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
 
-    
+    /*
     @objc func appMovedToBackground() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let navigationController = appDelegate.window!.rootViewController as! UINavigationController
@@ -45,7 +45,7 @@ class GameViewController: UIViewController {
             finishMatch(points: 0)
         }
         
-    }
+    } */
 
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
@@ -108,7 +108,7 @@ extension GameViewController : CommunicationServiceDelegate {
         print ("Bomb received", bomb.rawValue)
     }
     
-    func finishMatch (points: Int) {
+    func finishMatch (points: Int, contrincant: String) {
         print ("Finish match", points)
         DispatchQueue.main.async {
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -116,6 +116,7 @@ extension GameViewController : CommunicationServiceDelegate {
             let resultViewController: ResultsViewController = self.storyboard?.instantiateViewController(withIdentifier: "Results") as! ResultsViewController
             resultViewController.myPoints = self.scene.myPoints
             resultViewController.contrincantPoints = points
+            resultViewController.contrincantName = contrincant
             navigationController.pushViewController(resultViewController, animated: false)
             self.scene.endTimer()
         }

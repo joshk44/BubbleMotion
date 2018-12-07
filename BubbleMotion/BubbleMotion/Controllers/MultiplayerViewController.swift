@@ -64,7 +64,7 @@ extension MultiplayerViewController : CommunicationServiceDelegate {
     func bombReceived(bomb: GameState) {
     }
     
-    func finishMatch (points: Int) {
+    func finishMatch (points: Int, contrincant: String) {
     }
 
 }

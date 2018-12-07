@@ -45,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let visibleViewController = navigationController.visibleViewController
         if ( visibleViewController is GameViewController ) {
             (visibleViewController as! GameViewController).sendFinishMatch(points: 0)
-            (visibleViewController as! GameViewController).finishMatch(points: 0)
+            (visibleViewController as! GameViewController).finishMatch(points: 0, contrincant: "Juego cancelado")
         }
     }
     
